@@ -40,12 +40,14 @@ const init = async () => {
       Author.create({ name: "Stephen King" }),
     ]);
 
-    Promise.all([
+    await Promise.all([
       Book.create({
         title: "The Lord of the Rings: Fellowship of the Ring",
         authorId: tolken.id,
       }),
-      Book.create({ title: "Misery", authorId: king.id }),
+      Book.create({ 
+        title: "Misery", 
+        authorId: king.id }),
       Book.create({
         title: "Harry Potter and the Goblet of Fire",
         authorId: rowling.id,
@@ -62,7 +64,7 @@ const init = async () => {
 
 init();
 
-//EXPRESS LAYER
+//EXPRESS APP
 const express = require("express");
 const path = require("path");
 const app = express();
