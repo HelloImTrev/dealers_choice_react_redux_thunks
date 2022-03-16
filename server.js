@@ -27,6 +27,9 @@ const Author = sequelize.define("author", {
   },
 });
 
+Book.belongsTo(Author);
+Author.hasMany(Book);
+
 const init = async () => {
   try {
     await sequelize.sync({ force: true });
