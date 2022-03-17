@@ -1,8 +1,13 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { connect } from "react-redux";
-
+import { deleteBook } from "../redux/store";
 
 const BookList = (props) => {
+
+  const books = useSelector(state => state.books);
+  const dispatch = useDispatch();
+
   return (
     <div className="book-list">
       <table>
@@ -11,12 +16,12 @@ const BookList = (props) => {
             <th>Title</th>
             <th>Author</th>
           </tr>
-          {props.books.map((book) => {
+          {books.map((book) => {
             return (
               <tr key={book.id}>
                 <td>{book.title}</td>
                 <td>{book.author.name}</td>
-                <td><button>Delete</button></td>
+                <td><button onClick={() => dispatch(deleteBook(book))}>Delete</button></td>
               </tr>
             );
           })}
@@ -26,11 +31,21 @@ const BookList = (props) => {
   );
 };
 
-const mapState = (state) => {
-  return {
-    books: state.books,
-    author: state.authors,
-  };
-}
+// const mapState = (state) => {
+//   return {
+//     books: state.books,
+//     author: state.authors,
+//   };
+// }
 
-export default connect(mapState, {})(BookList);
+// const mapDispatch = (dispatch) => {
+//   return{
+//     delete: (book) => {
+//       dispatch(deleteBook(book));
+//     }
+//   } 
+// }
+
+//export default connect(mapState, mapDispatch)(BookList);
+
+export default BookList;
