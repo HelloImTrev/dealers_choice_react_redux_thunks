@@ -77,7 +77,9 @@ app.get("/", (req, res) => {
 
 app.get("/api/books", async (req, res, next) => {
   try {
-    await res.send(await Book.findAll({}));
+    await res.send(await Book.findAll({
+      include:[ Author ]
+    }));
   } catch (e) {
     next(e);
   }
