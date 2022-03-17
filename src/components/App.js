@@ -1,13 +1,12 @@
-import axios from "axios";
 import React from "react";
 import BookList from "./bookList";
 import store from "../redux/store";
-import Nav from "./nav";
+import { getBooks } from "../redux/store";
+
 
 class App extends React.Component {
   async componentDidMount() {
-    let res = await axios.get("/api/books");
-    store.dispatch({ type: "GET_BOOKS", books: res.data });
+    store.dispatch(getBooks())
   }
 
   render() {
@@ -17,7 +16,6 @@ class App extends React.Component {
           <h1>ACME Bookify</h1>
           <h4>Your Personal Library</h4>
         </div>
-        <div className="nav-container">{/* <Nav /> */}</div>
         <div className="container">
           <BookList />
         </div>

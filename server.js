@@ -45,9 +45,10 @@ const init = async () => {
         title: "The Lord of the Rings: Fellowship of the Ring",
         authorId: tolken.id,
       }),
-      Book.create({ 
-        title: "Misery", 
-        authorId: king.id }),
+      Book.create({
+        title: "Misery",
+        authorId: king.id,
+      }),
       Book.create({
         title: "Harry Potter and the Goblet of Fire",
         authorId: rowling.id,
@@ -75,11 +76,23 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.delete("/api/books/:id", async (req, res, next) => {
+  try {
+    const deletedBook = await Book.findByPk(req.params.id);
+    await deletedBook.destroy();
+    res.sendStatus(204);
+  } catch (e) {
+    next(e);
+  }
+});
+
 app.get("/api/books", async (req, res, next) => {
   try {
-    await res.send(await Book.findAll({
-      include:[ Author ]
-    }));
+    await res.send(
+      await Book.findAll({
+        include: [Author],
+      })
+    );
   } catch (e) {
     next(e);
   }

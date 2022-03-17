@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
+
 const BookList = (props) => {
   return (
     <div className="book-list">
@@ -15,6 +16,7 @@ const BookList = (props) => {
               <tr key={book.id}>
                 <td>{book.title}</td>
                 <td>{book.author.name}</td>
+                <td><button>Delete</button></td>
               </tr>
             );
           })}
@@ -24,11 +26,11 @@ const BookList = (props) => {
   );
 };
 
-function mapStateToProps(state) {
+const mapState = (state) => {
   return {
     books: state.books,
     author: state.authors,
   };
 }
 
-export default connect(mapStateToProps, {})(BookList);
+export default connect(mapState, {})(BookList);
