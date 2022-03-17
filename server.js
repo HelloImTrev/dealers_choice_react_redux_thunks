@@ -1,6 +1,6 @@
 //DATA LAYER
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("postgres://localhost/dealers_books");
+const sequelize = new Sequelize(process.env.DATABASE_URL || "postgres://localhost/dealers_books");
 
 const Book = sequelize.define("book", {
   title: {
